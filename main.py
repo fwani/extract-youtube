@@ -16,7 +16,7 @@ def download_audio(yt: YouTube):
         .first() \
         .download()
     base_dir = os.path.abspath('.')
-    title = re.sub(r'[,|#\'?:]', '', yt.title)
+    title = re.sub(r'[,|#\'?:%]', '', yt.title)
     webm = title + '.webm'
     mp3 = title + '.mp3'
     print(f"Convert [{webm}]\n     to [{mp3}]\n")
