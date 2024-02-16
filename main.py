@@ -28,10 +28,18 @@ def download_audio(yt: YouTube):
 def download_video(yt: YouTube):
     # video 추출
     print(f"Download [{yt.title}] from YouTube Video")
-    yt.streams \
+    video = yt.streams \
         .filter(resolution='1080p', mime_type='video/mp4') \
-        .first() \
-        .download()
+        .first()
+    if video:
+        video.download()
+    else:
+        yt.streams \
+            .filter(mime_type='video/mp4') \
+            .order_by("resolution") \
+            .desc() \
+            .first() \
+            .download()
 
 
 def download(url: str):
